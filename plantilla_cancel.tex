@@ -1,0 +1,91 @@
+\documentclass[a4paper,landscape]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{geometry}
+\usepackage{adjustbox}
+\usepackage{draftwatermark}
+\usepackage{booktabs}
+\usepackage{lmodern}
+\SetWatermarkText{\includegraphics{logo40.png}}
+\SetWatermarkScale{ 5 }
+\geometry{top=10mm, left=15mm, right=15mm, bottom=1mm, paperheight=700mm, paperwidth=1100mm }
+\title{Informe semanal}
+\date{\today}
+\author{}
+
+
+\begin{document}
+\vspace{10mm}
+\centering
+\begin{Huge}
+\textbf{Informe de pedidos cancelados}
+
+\vspace{2mm}
+
+%FECHA
+\end{Huge}
+
+\newcolumntype{i}{>{\columncolor{yellow}}c}
+\newcolumntype{e}{>{\columncolor{green}}c}
+\newcolumntype{h}{>{\columncolor{orange}}c}
+
+\definecolor{int}{RGB}{128,147,241}
+\definecolor{ext}{RGB}{114,221,247}
+\definecolor{total}{RGB}{127,255,212}
+\definecolor{neg}{RGB}{246,84,106}
+\definecolor{pos}{RGB}{168,230,207}
+
+\Huge \textbf {Repartos Internos}
+\begin{table}[!htbp]
+\centering
+\begin{adjustbox}{width=1\textwidth}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+\hline
+\rowcolor{int}
+ Id negocio & Nombre & Grupo & Pedidos cancelados & Pedidos completados & Total pedido/ticket cancelados & Perdida de Envios & Negocio pierde &	Happy pierde & Motivos \\
+\hline\hline
+%CINT
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\vspace{5mm}
+
+\Huge \textbf {Repartos Externos}
+\begin{table}[!htbp]
+\centering
+\begin{adjustbox}{width=1\textwidth}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+\hline
+\rowcolor{ext}
+ Id negocio & Nombre & Grupo & Pedidos cancelados & Pedidos completados & Total pedido/ticket cancelados & Perdida de Envios & Negocio pierde &	Happy pierde & Motivos \\
+\hline\hline
+%CEXT
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+
+\vspace{5mm}
+
+
+\begin{table}[!htbp]
+\centering
+\begin{adjustbox}{width=0.6\textwidth}
+\begin{tabular}{c|c|c|c|c|c|}
+\hline
+& Total pedido/Ticket cancelados & Pedidos cancelados & Pedidos completados  & Happy pierde  \\
+\hline\hline
+%CTOTAL
+\hline
+
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\resizebox{25cm}{!}{\includegraphics{completados_vs_cancelados.png}}
+
+\end{document}

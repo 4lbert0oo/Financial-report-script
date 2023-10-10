@@ -1,0 +1,127 @@
+\documentclass[a4paper,landscape]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{geometry}
+\usepackage{adjustbox}
+\usepackage{draftwatermark}
+\usepackage{booktabs}
+\usepackage{lmodern}
+\usepackage{lscape}
+
+\SetWatermarkText{\includegraphics{logo40.png}}
+\SetWatermarkScale{ 5 }
+\geometry{top=10mm, left=5mm, right=5mm, bottom=1mm, paperheight=700mm, paperwidth=800mm }
+\title{Informe semanal}
+\date{\today}
+\author{}
+
+
+\begin{document}
+\begin{landscape}
+\vspace{10mm}
+\centering
+\begin{Huge}
+\textbf{Informe Mensual}
+
+\vspace{2mm}
+
+%FECHA
+\end{Huge}
+
+\vspace{10mm}
+\newcolumntype{i}{>{\columncolor{yellow}}c}
+\newcolumntype{e}{>{\columncolor{green}}c}
+\newcolumntype{h}{>{\columncolor{orange}}c}
+
+\definecolor{int}{RGB}{128,147,241}
+\definecolor{ext}{RGB}{114,221,247}
+\definecolor{total}{RGB}{127,255,212}
+\definecolor{neg}{RGB}{246,84,106}
+\definecolor{pos}{RGB}{168,230,207}
+
+\Huge \textbf {Repartos Internos}
+\begin{table}[htbp]
+\centering
+\begin{adjustbox}{width=1\textwidth}
+\begin{tabular}{c|c||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\rowcolor{int}
+ Id negocio & Nombre & Grupo  & Comision & Nros Bancarios & Numero pedidos & Total pedido/Ticket & Total producto & Descuento & Envio & Propinas  & Ticket medio & Happy paga &	Beneficios bruto &	Beneficios x ticket & Cobro de recogidas & Ciudad \\
+\hline\hline
+%INT
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\vspace{5mm}
+
+\Huge \textbf {Repartos Externos}
+\begin{table}[htbp]
+\centering
+\begin{adjustbox}{width=1\textwidth}
+\begin{tabular}{c|c||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\rowcolor{ext}
+ Id negocio & Nombre & Grupo  & Comision & Nros Bancarios & Numero pedidos & Total pedido/Ticket & Total producto & Descuento & Envio & Propinas  & Ticket medio & Happy paga &	Beneficios bruto &	Beneficios x ticket & Cobro de entregas & Ciudad \\
+\hline\hline
+%EXT
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+
+\vspace{5mm}
+
+
+\begin{table}[htbp]
+\centering
+\begin{adjustbox}{width=0.6\textwidth}
+\begin{tabular}{c|c|c|c|c|c|}
+\hline
+& Total pedido/Ticket & 	Numero pedidos & 	Ticket medio & 	Beneficios bruto & 	Beneficios x ticket \\
+\hline\hline
+%TOTAL
+\hline
+
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+
+\vspace{3mm}
+
+%Tabla de pedidos de cada repartidor
+\centering
+\resizebox{20cm}{!}{
+\begin{tabular}{c|c|c|c|c}
+\hline
+Id & Repartidor/a & Numero pedidos & Calificaciones & Numero de reviews \\
+\hline
+%REPNUM
+
+\end{tabular}
+}
+\vspace{5mm}
+
+%Tabla de pedidos por dia
+%\centering
+%\resizebox{15cm}{!}{
+%\begin{tabular}{|c|c|}
+%\hline
+%Dia de la semana & Numero medio de pedidos  \\
+%\hline
+%--PEDDIA--
+
+%\end{tabular}
+%}
+
+\resizebox{25cm}{!}{\includegraphics{pedidos_por_dia.png}}\resizebox{25cm}{!}{\includegraphics{comparacion_registros_clientes.png}}
+\vspace{5mm}
+\resizebox{25cm}{!}{\includegraphics{tipo_pago_count.png}}\resizebox{25cm}{!}{\includegraphics{web_vs_app.png}}
+\resizebox{25cm}{!}{\includegraphics{completados_vs_cancelados.png}}\resizebox{25cm}{!}{\includegraphics{pedidos_por_hora.png}}
+
+\end{landscape}
+\end{document}
