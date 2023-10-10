@@ -76,9 +76,7 @@ def extraer_notes_database(order_id):
     with conect_to_database() as cnx:
         assert cnx
         mycursor = cnx.cursor()
-        mycursor.execute("select DISTINCT MT1.id, MT1.order_id, MT1.notes from mt_order_history as MT1"
-        " LEFT JOIN mt_order_history as MT2 on MT1.order_id=MT2.order_id and MT1.date_created<MT2.date_created where MT1.notes!='' "
-        " and MT1.order_id between %(inicial)s and %(final)s ORDER BY MT1.order_id", {'inicial': str(order_id[0]), 'final': str(order_id[final]) })
+        mycursor.execute("select DISTINCT ...", {'inicial': str(order_id[0]), 'final': str(order_id[final]) })
         myresult = mycursor.fetchall()
 
 
@@ -101,9 +99,7 @@ def extraer_reasons(order_id):
         assert cnx
         mycursor = cnx.cursor()
 
-        mycursor.execute("select DISTINCT MT1.id, MT1.order_id, MT1.remarks from mt_order_history as MT1 "
-        " LEFT JOIN mt_order_history as MT2 on MT1.order_id=MT2.order_id and MT2.date_created<MT1.date_created where  "
-        " MT1.remarks!='' and MT1.order_id between %(inicial)s and %(final)s ORDER BY MT1.order_id", {'inicial': str(order_id[0]), 'final': str(order_id[final]) })
+        mycursor.execute("select DISTINCT ...", {'inicial': str(order_id[0]), 'final': str(order_id[final]) })
 
         myresult = mycursor.fetchall()
         dict_order_reasons = {}
@@ -125,9 +121,7 @@ def extraer_pictures_database(order_id_array):
         assert cnx
         mycursor = cnx.cursor()
 
-        mycursor.execute("Select DISTINCT O.order_id, DTP.photo_name FROM mt_driver_task_photo as DTP INNER JOIN (mt_driver_task as DT, mt_order as O) "
-        " ON (DT.task_id=DTP.task_id and DT.order_id=O.order_id) "
-        " where O.order_id between %(inicial)s and %(final)s ORDER BY order_id", {'inicial': str(order_id_array[0]), 'final': str(order_id_array[final]) })
+        mycursor.execute("Select DISTINCT ...", {'inicial': str(order_id_array[0]), 'final': str(order_id_array[final]) })
 
         myresult = mycursor.fetchall()
 
@@ -144,7 +138,7 @@ def extraer_negocios_y_comisiones():
         assert cnx
         mycursor = cnx.cursor()
 
-        sql = "SELECT merchant_id, percent_commision, city, bank_account, payment_group FROM mt_merchant order by merchant_id"
+        sql = "SELECT ..."
 
         mycursor.execute(sql)
         myresult = mycursor.fetchall()
@@ -186,46 +180,26 @@ def extraer_pedidos(fecha_inicio,fecha_final, ciudad):
 
         if ciudad=="general" and fecha_final:
             mycursor.execute(
-                ' Select DISTINCT O.order_id, O.merchant_id, O.trans_type, O.payment_type, O.sub_total, O.total_w_tax, O.delivery_charge, O.voucher_amount, O.points_discount,'
-                ' O.cart_tip_value, O.status, M.restaurant_name, O.delivery_date,'
-                ' CONCAT(D.first_name, " " , D.last_name) AS driver, O.request_from, D.driver_id, DT.rating, O.delivery_time from mt_order as O LEFT JOIN mt_merchant as M on O.merchant_id=M.merchant_id'
-                ' LEFT JOIN (mt_driver_task AS DT, mt_driver AS D) ON (DT.driver_id = D.driver_id AND DT.order_id = O.order_id)'
-                ' WHERE O.status!="initial_order" and '
-                ' O.delivery_date between %(inicial)s and %(final)s'
-                ' order by O.order_id;', {'inicial': fecha_inicio, 'final': fecha_final })
+                ' Select...'
+                ' ...'
+                ' ...', {'inicial': fecha_inicio, 'final': fecha_final })
 
         elif ciudad!="general" and fecha_final:
             mycursor.execute(
-                ' Select DISTINCT O.order_id, O.merchant_id, O.trans_type, O.payment_type, O.sub_total, O.total_w_tax, O.delivery_charge, O.voucher_amount, O.points_discount,'
-                ' O.cart_tip_value, O.status, M.restaurant_name, O.delivery_date,'
-                ' CONCAT( D.first_name, " " , D.last_name) AS driver, O.request_from, D.driver_id, DT.rating, O.delivery_time from mt_order as O LEFT JOIN mt_merchant as M on O.merchant_id=M.merchant_id'
-                ' LEFT JOIN (mt_driver_task AS DT, mt_driver AS D) ON (DT.driver_id = D.driver_id AND DT.order_id = O.order_id)'
-                ' WHERE O.status!="initial_order" and '
-                ' M.city= %(ciudad)s'
-                ' and O.delivery_date between %(inicial)s and %(final)s'
-                ' order by O.order_id;'
+                ' Select ...'               
             , {'ciudad': ciudad, 'inicial': fecha_inicio, 'final': fecha_final })
 
         elif ciudad!="general":
             mycursor.execute(
-                'Select DISTINCT O.order_id, O.merchant_id, O.trans_type, O.payment_type, O.sub_total, O.total_w_tax, O.delivery_charge, O.voucher_amount, O.points_discount,'
-                ' O.cart_tip_value, O.status, M.restaurant_name, O.delivery_date,'
-                ' CONCAT( D.first_name, " " , D.last_name) AS driver, O.request_from, D.driver_id, DT.rating, O.delivery_time  from mt_order as O LEFT JOIN mt_merchant as M on O.merchant_id=M.merchant_id'
-                ' LEFT JOIN (mt_driver_task AS DT, mt_driver AS D) ON (DT.driver_id = D.driver_id AND DT.order_id = O.order_id)'
-                ' WHERE O.status!="initial_order" and '
-                ' M.city= %(ciudad)s'
-                ' and O.delivery_date = %(inicial)s'
-                ' order by O.order_id;', {'ciudad': ciudad, 'inicial': fecha_inicio })
+                'Select DISTINCT ...'
+                ' ...'
+                ' ...', {'ciudad': ciudad, 'inicial': fecha_inicio })
 
         else:
             mycursor.execute(
-                ' Select DISTINCT O.order_id, O.merchant_id, O.trans_type, O.payment_type, O.sub_total, O.total_w_tax, O.delivery_charge, O.voucher_amount, O.points_discount,'
-                ' O.cart_tip_value, O.status, M.restaurant_name, O.delivery_date,'
-                ' CONCAT(D.first_name, " " , D.last_name) AS driver, O.request_from, D.driver_id, DT.rating, O.delivery_time from mt_order as O LEFT JOIN mt_merchant as M on O.merchant_id=M.merchant_id'
-                ' LEFT JOIN (mt_driver_task AS DT, mt_driver AS D) ON (DT.driver_id = D.driver_id AND DT.order_id = O.order_id)'
-                ' WHERE O.status!="initial_order" and '
-                ' O.delivery_date=%(inicial)s'
-                ' order by O.order_id;' , {'inicial': fecha_inicio })
+                ' Select DISTINCT ...'
+                '...'
+                ' ...' , {'inicial': fecha_inicio })
 
         myresult = mycursor.fetchall()
         copy=myresult
@@ -467,7 +441,7 @@ def get_clientes_registrados(f_inicio, f_final):
         with conect_to_database() as cnx:
             assert cnx
             mycursor = cnx.cursor()
-            mycursor.execute('select count(*) from mt_client where Date(date_created) between %(i)s and %(f)s;' , {'i': f_inicio, 'f': f_final })
+            mycursor.execute('select count(*) ...' , {'i': f_inicio, 'f': f_final })
             myresult = mycursor.fetchone()
             return myresult[0]
 
